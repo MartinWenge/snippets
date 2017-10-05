@@ -15,6 +15,8 @@ if [ ! -s "${file1}" ] && [ ! -s "${file2}" ]; then
   echo -e "0.75 \t 1.12 \t 2.21" >> ${file1}
   echo -e "0.50 \t 1.52 \t 2.51" >  ${file2}
   examplerun=1
+  cat ${file1}
+  cat ${file2}
 fi
 
 # remove comments and blank lines from data files (might be added after merging again...
