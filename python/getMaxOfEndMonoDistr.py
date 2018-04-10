@@ -38,16 +38,19 @@ for g in generations:
                 if os.path.isfile(filepath):
                     # read in the file and sort it by my datatypes
                     all_file = np.loadtxt(filepath,dtype={'names' : ('radius', 'counts', 'distribution'),'formats' : (np.float, np.float, np.float)},comments='#', delimiter='\t')
-                    # skip the first few entries to get rid of normalisation maxima
-                    subset = all_file[4:]
-                    # get the maximum value of the end monomer distribution
-                    maxID = np.argmax(subset['distribution'])
-                    # create the lookup with all the paramter information used later
-                    maxPair = (g,s,numOfMonos,n,d,subset['radius'][maxID],subset['distribution'][maxID])
-                    # show the results
-                    print(filepath, maxPair)
-                    # add it to the output container
-                    dataContainer.append(maxPair)
+
+                    # check if the file contains enough data
+                    if all_file.shape[0] > 6:
+                        # skip the first few entries to get rid of normalisation maxima
+                        subset = all_file[4:]
+                        # get the maximum value of the end monomer distribution
+                        maxID = np.argmax(subset['distribution'])
+                        # create the lookup with all the paramter information used later
+                        maxPair = (g,s,numOfMonos,n,d,subset['radius'][maxID],subset['distribution'][maxID])
+                        # show the results
+                        print(filepath, maxPair)
+                        # add it to the output container
+                        dataContainer.append(maxPair)
 
 # after collecting the data, write the whole stuff to the summary file
 resultFilePath = os.path.join("maxOfEndMonoDistribution_sdips_sum.dat")
