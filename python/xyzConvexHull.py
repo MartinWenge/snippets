@@ -15,7 +15,7 @@ def main():
         sys.exit()
 
     # read in the xyz file 
-    coordinates = np.genfromtxt(filepath, skip_header=18, delimiter="\t", comments="#")[:,:-1]
+    coordinates = np.genfromtxt(filepath, delimiter="\t", comments="#")[:,:-1]
     # compute the convex hull and the area
     hull = ConvexHull(coordinates)
     print(hull.area)
